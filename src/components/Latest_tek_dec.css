@@ -1,0 +1,244 @@
+.nh-srls {
+  max-width: 1550px;
+  margin: 0 auto;
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  gap: 32px;
+  width: 100%;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+}
+
+.nh-srls > div {
+  flex: 1;
+  width: 50%;
+}
+
+.nh-news-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 16px;
+  cursor: pointer;
+  box-sizing: border-box;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-card, var(--bg-primary));
+}
+
+.nh-news-cardimglong {
+  width: 100%;
+  height: 100%;       
+  object-fit: cover;
+  display: block;
+}
+
+.nh-txtitems {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 24px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
+  z-index: 2;        
+}
+
+.nh-txtitems h3 {
+  color: var(--text-overlay, #ffffff);
+  font-size: 1.3rem;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+}
+
+.nh-news-cardtwo {
+  background-color: var(--bg-card, var(--bg-primary));
+  border: 1px solid var(--border-color);
+  width: 100%; 
+  display: flex;
+  align-items: center;
+  border-radius: 16px;
+  margin-top: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.nh-news-cardtwo:hover {
+  background-color: var(--bg-hover, var(--bg-card));
+  border-color: var(--border-hover, var(--border-color));
+}
+
+.nh-imgsmall {
+  width: 140px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+  flex-shrink: 0;
+  margin: 12px;
+}
+
+.nh-itemcard {
+  padding: 12px 12px 12px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.nh-itemcard h3 {
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.4;
+  color: var(--text-main);
+}
+
+.nh-viewandtimer {
+  margin-top: 12px;
+  display: flex;
+  gap: 16px;
+  font-size: 0.85rem;
+  color: var(--text-muted, #71717a);
+}
+
+.nh-title-lifestyle,
+.nh-title-decoration {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--text-main);
+  margin-bottom: 16px;
+  padding-right: 12px; 
+}
+
+.nh-title-lifestyle {
+  border-right: 7px solid var(--accent-green, #10b981); 
+  border-radius: 4px; 
+}
+
+.nh-title-decoration {
+  border-right: 6px solid var(--accent-blue, #3b82f6); 
+  border-radius: 4px; 
+}
+
+.nh-card-tag {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  margin: 0;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--text-on-accent, #ffffff);
+  border-radius: 6px;
+  z-index: 3;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.nh-tag-green {
+  background-color: var(--accent-green, #10b981);
+}
+
+.nh-tag-blue {
+  background-color: var(--accent-blue, #3b82f6);
+}
+
+@media (max-width: 1024px) {
+  .nh-srls {
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .nh-imgsmall {
+    width: 120px;
+    height: 95px;
+  }
+  
+  .nh-txtitems h3 {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 850px) {
+  .nh-srls {
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    width: 100%;
+  }
+
+  .nh-srls > div {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .nh-news-card {
+    border-radius: 14px;
+    width: 100%;
+  }
+
+  .nh-txtitems {
+    padding: 16px;
+  }
+
+  .nh-txtitems h3 {
+    font-size: 1.05rem;
+  }
+
+  .nh-news-cardtwo {
+    border-radius: 14px;
+    width: 100%;
+  }
+
+  .nh-imgsmall {
+    width: 110px;
+    height: 90px;
+    margin: 10px;
+    border-radius: 10px;
+  }
+
+  .nh-itemcard {
+    padding: 8px 8px 8px 0;
+  }
+
+  .nh-itemcard h3 {
+    font-size: 0.95rem;
+  }
+
+  .nh-viewandtimer {
+    margin-top: 8px;
+    font-size: 0.78rem;
+    gap: 10px;
+  }
+
+  .nh-title-lifestyle,
+  .nh-title-decoration {
+    font-size: 1.25rem;
+    padding-right: 10px;
+  }
+
+  .nh-card-tag {
+    top: 10px;
+    right: 10px;
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nh-srls {
+    padding: 12px;
+  }
+
+  .nh-imgsmall {
+    width: 95px;
+    height: 80px;
+    margin: 8px;
+  }
+}

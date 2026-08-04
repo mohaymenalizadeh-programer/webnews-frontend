@@ -1,0 +1,134 @@
+.acs-wrapper {
+  max-width: 1550px;
+  margin: 0 auto;
+  padding: 24px;
+  box-sizing: border-box;
+
+  color: var(--text-main);
+}
+
+.acs-title {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--text-main);
+  margin-bottom: 20px;
+  padding-right: 12px;
+  border-right: 4px solid var(--border-color);
+  border-radius: 2px;
+}
+
+.acs-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.acs-slider-box {
+  width: 100%;
+  overflow: hidden;
+}
+
+.acs-track {
+  display: flex;
+  gap: 16px;
+  transition: transform 0.5s ease-in-out;
+}
+
+.acs-card {
+  flex: 0 0 calc(25% - 12px);
+  background-color: var(--bg-card, var(--bg-primary));
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.acs-img-box {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.acs-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  padding: 11px;
+  border-radius: 19px;
+}
+
+.acs-content {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.acs-content h3 {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  margin: 0 0 16px 0;
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.acs-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-muted, var(--text-main));
+}
+
+.acs-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background-color: var(--bg-card, var(--bg-primary));
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.acs-arrow-prev {
+  right: 10px;
+}
+
+.acs-arrow-next {
+  left: 10px;
+}
+
+@media (max-width: 1024px) {
+  .acs-card {
+    flex: 0 0 calc(33.333% - 11px);
+  }
+}
+
+@media (max-width: 768px) {
+  .acs-card {
+    flex: 0 0 calc(50% - 8px);
+  }
+}
+
+@media (max-width: 480px) {
+  .acs-card {
+    flex: 0 0 100%;
+  }
+}
