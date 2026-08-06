@@ -2,8 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Navbar.css';
+import { Helmet } from 'react-helmet-async';
 
-const API_BASE = 'http://127.0.0.1:8000';
+const API_BASE = 'https://webflow.pythonanywhere.com';
 
 const SearchIcon = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>;
 const MoonIcon = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>;
@@ -24,12 +25,12 @@ function Navbar({ onSelectNewsOfDay }) {
   const inputRef = useRef(null);
 
   const navLinks = [
-    { id: 1, label: 'تکنولوژی', path: '/technology' },
-    { id: 2, label: 'سبک زندگی', path: '/lifestyle' },
-    { id: 3, label: 'دکوراسیون', path: '/decoration' },
-    { id: 4, label: 'فرهنگ و هنر', path: '/artculture' },
-    { id: 6, label: 'نمونه کار ها', path: '/Portfolio' },
-    { id: 5, label: 'اخبار روز', path: '/news-of-day', isNewsOfDay: true },
+    { id: 2, label: 'تکنولوژی', path: '/technology' },
+    { id: 3, label: 'سبک زندگی', path: '/lifestyle' },
+    { id: 4, label: 'دکوراسیون', path: '/decoration' },
+    { id: 5, label: 'فرهنگ و هنر', path: '/artculture' },
+    { id: 6, label: 'اخبار روز', path: '/news-of-day', isNewsOfDay: true },
+    { id: 7, label: 'نمونه کار ها', path: '/Portfolio' },
   ];
 
   useEffect(() => {
@@ -90,6 +91,10 @@ function Navbar({ onSelectNewsOfDay }) {
 
   return (
     <div dir="rtl" className="navbar-wrapper">
+      <Helmet>
+        <title>نیوز فلو</title>
+        <link rel="icon" type="image/jpeg" href="/7dac5e26-f0ae-456a-b917-7aa8ff62fef3.jpeg" />
+      </Helmet>
       <div className="topbar">
         <div className="topbar-inner">
           <div className="news-badge">

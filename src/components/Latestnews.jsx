@@ -3,8 +3,20 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Latestnews.css';
 
+import Home from './Home.jsx';
+import Latestdecoration from './Latestdecoration.jsx';
+import Newtechnology from './Newtechnology.jsx';
+import NewsHub from './NewsHub.jsx';
+import Latest_tek_dec from './Latest_tek_dec.jsx';
+import Artcultureslider from './Artcultureslider.jsx';
 
 const API_BASE = 'https://webflow.pythonanywhere.com';
+
+const getImgUrl = (path) => {
+  if (!path) return 'https://placehold.co/300x180';
+  if (path.startsWith('http')) return path;
+  return `${API_BASE}/media/${path.replace(/.*\/media\//, '')}`;
+};
 
 function getRelativeTime(dateString) {
   if (!dateString) return '';
@@ -36,7 +48,6 @@ function LatestNews() {
       .catch(err => console.error("خطا در دریافت اطلاعات:", err));
   }, []);
 
-  // ترکیب ۵ کلید ارسال شده از بک‌اند فقط برای بخش اسلایدر
   const sliderItems = [
     ...(singleData?.twonewsofdaysliders || []).map(item => ({ ...item, cat: 'newsoftheday' })),
     ...(singleData?.twolifestylesliders || []).map(item => ({ ...item, cat: 'lifestyle' })),
@@ -58,7 +69,56 @@ function LatestNews() {
     navigate(`/${category}/${slug}`);
   };
 
-  if (!singleData) return <div className="loading">در حال بارگذاری...</div>;
+  if (!singleData) {
+    return (
+      <div
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100vh',
+        margin: 0,
+        backgroundColor: '#ffffff',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 9999,
+        margin: '0 auto', 
+        textAlign: 'center',
+        
+      }}
+    >
+      <svg
+        width="70"
+        height="70"
+        viewBox="0 0 70 70"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="35"
+          cy="35"
+          r="27"
+          fill="none"
+          stroke="#ff156d"
+          strokeWidth="6"
+          strokeLinecap="round"
+          strokeDasharray="42 130"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="0 35 35"
+            to="360 35 35"
+            dur="1s"
+            repeatCount="indefinite"
+          />
+        </circle>
+      </svg>
+    </div>
+    );
+  }
+  
 
   return (
     <div>
@@ -66,7 +126,7 @@ function LatestNews() {
         <div className="left-cards-grid">
           {singleData.lifestyle?.map((item, i) => (
             <div key={i} className="news-card" onClick={() => registerView('lifestyle', item.slug)}>
-              <img src={`${API_BASE}/media/${item.img_Lifestyle}`} alt="img" className="news-card-img" />
+              <img src={getImgUrl(item.img_Lifestyle)} alt="img" className="news-card-img" />
               <span className="news-badge badge-green">سبک زندگی</span>
               <div className="news-card-content">
                 <p className="news-card-title">{item.begtxt}</p>
@@ -80,7 +140,7 @@ function LatestNews() {
 
           {singleData.decoration?.map((item, i) => (
             <div key={i} className="news-card" onClick={() => registerView('decoration', item.slug)}>
-              <img src={`${API_BASE}/media/${item.img_Decoration}`} alt="img" className="news-card-img" />
+              <img src={getImgUrl(item.img_Decoration)} alt="img" className="news-card-img" />
               <span className="news-badge badge-purple">دکوراسیون</span>
               <div className="news-card-content">
                 <p className="news-card-title">{item.text}</p>
@@ -94,7 +154,7 @@ function LatestNews() {
 
           {singleData.technology?.map((item, i) => (
             <div key={i} className="news-card" onClick={() => registerView('technology', item.slug)}>
-              <img src={`${API_BASE}/media/${item.img_Technology}`} alt="img" className="news-card-img" />
+              <img src={getImgUrl(item.img_Technology)} alt="img" className="news-card-img" />
               <span className="news-badge badge-blue">تکنولوژی</span>
               <div className="news-card-content">
                 <p className="news-card-title">{item.matn}</p>
@@ -108,7 +168,7 @@ function LatestNews() {
 
           {singleData.artculture?.map((item, i) => (
             <div key={i} className="news-card" onClick={() => registerView('artculture', item.slug)}>
-              <img src={`${API_BASE}/media/${item.img_Artculture}`} alt="img" className="news-card-img" />
+              <img src={getImgUrl(item.img_Artculture)} alt="img" className="news-card-img" />
               <span className="news-badge badge-cyan">فرهنگ و هنر</span>
               <div className="news-card-content">
                 <p className="news-card-title">{item.dodslg}</p>
@@ -124,10 +184,10 @@ function LatestNews() {
         <div className="right-featured-container">
           {singleData.newsoftheday?.map((item, i) => (
             <div key={i} className="news-card featured-big-card" onClick={() => registerView('newsoftheday', item.slug)}>
-              <img src={`${API_BASE}/media/${item.img_ftheday}`} alt="img" className="news-card-img" />
+              <img src={getImgUrl(item.img_ftheday)} alt="img" className="news-card-img" />
               <span className="news-badge badge-red">اخبار روز</span>
               <div className="news-card-content">
-              <h3 className="featured-text">{item.txt_news}</h3>
+                <h3 className="featured-text">{item.txt_news}</h3>
                 <p className="featured-title">{item.title_news}</p>
                 <div className="news-card-meta">
                   <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>{getRelativeTime(item.publish_date)}</span>
@@ -139,22 +199,18 @@ function LatestNews() {
         </div>
       </div>
       
-      {/* ─── بخش اسلایدر اختصاصی ۵ کلید جدید ─── */}
       {sliderItems.length > 0 && (
         <div className="exact-slider-container">
           <div className="exact-slider-wrapper" style={{ transform: `translateX(${currentSlide * 100}%)` }}>
             {sliderItems.map((item, i) => {
-              // دریافت تصویر بر اساس مدل‌های مختلف ۵ کلید
               const slideImage = item.img_ftheday || item.img_Lifestyle || item.img_Decoration || item.img_Technology || item.img_Artculture;
-              
-              // دریافت تیتر بر اساس مدل‌های مختلف ۵ کلید
               const slideTitle = item.title_news || item.longtitle || item.title || item.explanation || item.Artculture_title || item.txt_news || item.begtxt || item.text || item.matn || item.dodslg;
 
               return (
                 <div key={i} className="exact-slide">
                   <div className="exact-card" onClick={() => registerView(item.cat, item.slug)}>
                     <div className="exact-card-media">
-                      <img src={`${API_BASE}/media/${slideImage}`} alt="img" className="exact-img" />
+                      <img src={getImgUrl(slideImage)} alt="img" className="exact-img" />
                       <span className="exact-badge">اخبار ویژه</span>
                     </div>
                     <div className="exact-card-body">
@@ -202,7 +258,7 @@ function LatestNews() {
         <div className='dsdsd'>
           {singleData.decoration?.map((item, i) => (
             <div key={i} className="sdfg" onClick={() => registerView('decoration', item.slug)}>
-              <img src={`${API_BASE}/media/${item.img_Decoration}`} alt="img" className="imageboc" />
+              <img src={getImgUrl(item.img_Decoration)} alt="img" className="imageboc" />
               <span className="boxnewstxt">دکوراسیون</span>
               <div className="boxnewscontent">
                 <p className="boxnewstitle">{item.text}</p>
@@ -221,38 +277,35 @@ function LatestNews() {
               <div className="dm-info-block">
                 <p className="dm-header-text">{item.text}</p>
                 <div className="dm-stats-row">
-                <div className="dm-stats-row">
+                  <span className="dm-stat-item">
+                    <span className='plpl'>{item.views || 0}</span>
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  </span>
 
-  <span className="dm-stat-item">
-    <span  className='plpl'>{item.views || 0}</span>
-    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-      <circle cx="12" cy="12" r="3"></circle>
-    </svg>
-  </span>
-
-
-  <span className="dm-stat-item">
-    <span className='plpl'>{getRelativeTime(item.publish_date)}</span> 
-    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <circle cx="12" cy="12" r="10"></circle>
-      <polyline points="12 6 12 12 16 14"></polyline>
-    </svg>
-  </span>
-</div>
-
-<br />
-</div>
-
-                
+                  <span className="dm-stat-item">
+                    <span className='plpl'>{getRelativeTime(item.publish_date)}</span> 
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                  </span>
+                </div>
               </div>
-              <img src={`${API_BASE}/media/${item.img_Decoration}`} alt="img" className="dm-media-thumb" />
+              <img src={getImgUrl(item.img_Decoration)} alt="img" className="dm-media-thumb" />
             </div>
           ))}
         </div>
       </div>
 
-
+      <Latestdecoration />
+      <Home />
+      <Newtechnology />
+      <NewsHub />
+      <Latest_tek_dec />
+      <Artcultureslider />
     </div>
   );
 }

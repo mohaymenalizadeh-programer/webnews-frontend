@@ -3,7 +3,7 @@
   margin: 0 auto;
   padding: 24px;
   box-sizing: border-box;
-
+border-radius: 1px;
   color: var(--text-main);
 }
 

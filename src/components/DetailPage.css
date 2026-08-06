@@ -112,14 +112,28 @@
   .det-long-text-box {
     font-size: 15px;
     line-height: 1.9;
-    color:var(--text-main);
+    color: var(--text-main);
     text-align: justify;
     padding: 10px 4px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    overflow: hidden;
   }
-  
   .det-long-text-box p {
-    margin: 0;
+    margin: 0 0 12px 0;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
+
+  .det-long-text-box img,
+.det-long-text-box iframe {
+  max-width: 100%;
+  height: auto;
+}
   
 
   .det-related-section {

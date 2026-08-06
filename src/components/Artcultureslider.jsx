@@ -2,20 +2,25 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Artcultureslider.css';
+import { Helmet } from 'react-helmet-async';
 
 const API_BASE = 'https://webflow.pythonanywhere.com';
+
+export const getImgUrl = (path) => {
+  if (!path) return 'https://placehold.co/300x180?text=No+Image';
+  if (path.startsWith('http')) return path;
+  return `${API_BASE}/media/${path.replace(/.*\/media\//, '')}`;
+};
 
 function getRelativeTime(dateString) {
   if (!dateString) return 'چندی پیش';
   
   const now = new Date();
   const past = new Date(dateString);
-  
 
   if (isNaN(past.getTime())) return 'چندی پیش';
 
   const diffInSeconds = Math.floor((now - past) / 1000);
-
 
   if (diffInSeconds < 30) return "همین الان";
   
@@ -46,13 +51,19 @@ function Artcultureslider() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`${API_BASE}/api/list/`)
+    const controller = new AbortController();
+
+    axios.get(`${API_BASE}/api/list/`, { signal: controller.signal })
       .then(res => {
         if (res.data && res.data.artcultureslider) {
           setItems(res.data.artcultureslider);
         }
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        if (!axios.isCancel(err)) console.error("خطا در دریافت اطلاعات اسلایدر:", err);
+      });
+
+    return () => controller.abort();
   }, []);
 
   useEffect(() => {
@@ -99,6 +110,7 @@ function Artcultureslider() {
 
   return (
     <div className="acs-wrapper" dir="rtl">
+      
       <h2 className="acs-title">فرهنگ و هنر</h2>
       <div className="acs-container">
         {items.length > visibleCards && (
@@ -113,13 +125,6 @@ function Artcultureslider() {
             style={{ transform: `translateX(${currentIndex * (100 / visibleCards)}%)` }}
           >
             {items.map((item, index) => {
-              const imgPath = item.img_Artculture || '';
-              const imgSrc = imgPath.startsWith('http') 
-                ? imgPath 
-                : imgPath.startsWith('/media/') 
-                  ? `${API_BASE}${imgPath}`
-                  : `${API_BASE}/media/${imgPath.replace(/^\//, '')}`;
-
               const newsSlug = item.slug || item.slug_news;
 
               return (
@@ -131,8 +136,8 @@ function Artcultureslider() {
                   <div className="acs-img-box">
                     <img
                       className="acs-img"
-                      src={imgSrc}
-                      alt={item.dodslg || ''}
+                      src={getImgUrl(item.img_Artculture)}
+                      alt={item.dodslg || 'تصویر خبر'}
                       onError={(e) => { e.target.src = 'https://placehold.co/300x180?text=No+Image'; }}
                     />
                   </div>

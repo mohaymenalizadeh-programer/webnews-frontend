@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Newtechnology.css';
+import { Helmet } from 'react-helmet-async';
 
 const API_BASE = 'https://webflow.pythonanywhere.com';
 
-// تابع ساخت آدرس معتبر برای تصاویر
-const getImgUrl = (imgPath) => {
-  if (!imgPath) return 'https://via.placeholder.com/300x180?text=No+Image';
-  if (imgPath.startsWith('http')) return imgPath;
-  return `${API_BASE}/media/${imgPath}`;
+const getImgUrl = (path) => {
+  if (!path) return 'https://via.placeholder.com/300x180';
+  if (path.startsWith('http')) return path;
+  return `https://webflow.pythonanywhere.com/media/${path.replace(/.*\/media\//, '')}`;
 };
 
-// تابع تبدیل زمان به صورت نسبی و فارسی
+
 function getRelativeTime(dateString) {
   if (!dateString) return '';
   const diffInSeconds = Math.floor((new Date() - new Date(dateString)) / 1000);
@@ -57,12 +57,28 @@ function Latestdecoration() {
 
   const handleNavigate = (slug) => {
     if (!slug) return;
-    // فقط انتقال انجام می‌شود؛ ثبت بازدید در صفحه مقصد انجام می‌گیرد
     navigate(`/technology/${slug}`);
   };
 
   if (loading) {
-    return <div className="tech-wrapper" dir="rtl"><p>در حال بارگذاری...</p></div>;
+    return <div className="tech-wrapper" dir="rtl"><p><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="100" height="30">
+    <circle fill="#FF156D" stroke="#FF156D" stroke-width="2" r="8" cx="20" cy="30">
+      <animate attributeName="cx" calcMode="spline" dur="2" values="20;180;180;20;20" keySplines="0 .1 .5 1;0 .1 .5 1;0 .1 .5 1;0 .1 .5 1" repeatCount="indefinite" begin="0"></animate>
+    </circle>
+    <circle fill="#FF156D" stroke="#FF156D" stroke-width="2" opacity=".8" r="8" cx="20" cy="30">
+      <animate attributeName="cx" calcMode="spline" dur="2" values="20;180;180;20;20" keySplines="0 .1 .5 1;0 .1 .5 1;0 .1 .5 1;0 .1 .5 1" repeatCount="indefinite" begin="0.05"></animate>
+    </circle>
+    <circle fill="#FF156D" stroke="#FF156D" stroke-width="2" opacity=".6" r="8" cx="20" cy="30">
+      <animate attributeName="cx" calcMode="spline" dur="2" values="20;180;180;20;20" keySplines="0 .1 .5 1;0 .1 .5 1;0 .1 .5 1;0 .1 .5 1" repeatCount="indefinite" begin=".1"></animate>
+    </circle>
+    <circle fill="#FF156D" stroke="#FF156D" stroke-width="2" opacity=".4" r="8" cx="20" cy="30">
+      <animate attributeName="cx" calcMode="spline" dur="2" values="20;180;180;20;20" keySplines="0 .1 .5 1;0 .1 .5 1;0 .1 .5 1;0 .1 .5 1" repeatCount="indefinite" begin=".15"></animate>
+    </circle>
+    <circle fill="#FF156D" stroke="#FF156D" stroke-width="2" opacity=".2" r="8" cx="20" cy="30">
+      <animate attributeName="cx" calcMode="spline" dur="2" values="20;180;180;20;20" keySplines="0 .1 .5 1;0 .1 .5 1;0 .1 .5 1;0 .1 .5 1" repeatCount="indefinite" begin=".2"></animate>
+    </circle>
+  </svg>
+  </p></div>;
   }
 
   return (

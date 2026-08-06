@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './NewsOfDayPage.css';
+import { Helmet } from 'react-helmet-async';
 
 const API_BASE = 'https://webflow.pythonanywhere.com';
 
@@ -39,10 +40,10 @@ function getRelativeTime(dateString) {
   return `${diffInYears} سال پیش`;
 }
 
-const getImgUrl = (imgPath) => {
-  if (!imgPath) return 'https://via.placeholder.com/150?text=No+Image';
-  if (imgPath.startsWith('http')) return imgPath;
-  return `${API_BASE}/media/${imgPath}`;
+const getImgUrl = (path) => {
+  if (!path) return 'https://via.placeholder.com/300x180';
+  if (path.startsWith('http')) return path;
+  return `${API_BASE}/media/${path.replace(/.*\/media\//, '')}`;
 };
 
 function LifestylePage() {
@@ -100,6 +101,10 @@ function LifestylePage() {
 
   return (
     <div className="nod-page-wrapper" dir="rtl">
+      <Helmet>
+        <title>نیوز فلو</title>
+        <link rel="icon" type="image/jpeg" href="/7dac5e26-f0ae-456a-b917-7aa8ff62fef3.jpeg" />
+      </Helmet>
       <div className="nod-container">
         <div className="nod-header">
           <h1>سبک زندگی</h1>
@@ -108,7 +113,48 @@ function LifestylePage() {
         <div className="nod-main-layout">
           <div className="nod-grid-right">
             {loading ? (
-              <div className="nod-state-msg">در حال بارگذاری...</div>
+              <div className="nod-state-msg">    <div
+              style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100vh',
+                margin: 0,
+                backgroundColor: '#ffffff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 9999,
+              }}
+            >
+              <svg
+                width="70"
+                height="70"
+                viewBox="0 0 70 70"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="35"
+                  cy="35"
+                  r="27"
+                  fill="none"
+                  stroke="#ff156d"
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                  strokeDasharray="42 130"
+                >
+                  <animateTransform
+                    attributeName="transform"
+                    type="rotate"
+                    from="0 35 35"
+                    to="360 35 35"
+                    dur="1s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+              </svg>
+            </div></div>
             ) : newsList.length === 0 ? (
               <div className="nod-state-msg">هیچ خبری یافت نشد.</div>
             ) : (

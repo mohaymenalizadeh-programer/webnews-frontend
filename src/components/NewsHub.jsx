@@ -2,16 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './NewsHub.css';
+import { Helmet } from 'react-helmet-async';
 
 const API_BASE = 'https://webflow.pythonanywhere.com';
 
-// تابع ساخت آدرس معتبر برای تصاویر
-const getImgUrl = (imgPath) => {
-  if (!imgPath) return 'https://via.placeholder.com/300x180?text=No+Image';
-  if (imgPath.startsWith('http')) return imgPath;
-  return `${API_BASE}/media/${imgPath}`;
+const getImgUrl = (path) => {
+  if (!path) return 'https://via.placeholder.com/300x180';
+  if (path.startsWith('http')) return path;
+  return `${API_BASE}/media/${path.replace(/.*\/media\//, '')}`;
 };
-
 function getRelativeTime(dateString) {
   if (!dateString) return '';
   const diffInSeconds = Math.floor((new Date() - new Date(dateString)) / 1000);
@@ -59,6 +58,7 @@ function NewsHub() {
 
   return (
     <div className="grid-main-wrapper" dir="rtl">
+
       <div className="grid-title-header">
         <span className="red-mark"></span>
         <h2>جدیدترین خبرها</h2>

@@ -2,8 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Latest_tek_dec.css';
+import { Helmet } from 'react-helmet-async';
 
 const API_BASE = 'https://webflow.pythonanywhere.com';
+
+const getImgUrl = (path) => {
+  if (!path) return 'https://via.placeholder.com/300x180';
+  if (path.startsWith('http')) return path;
+  return `${API_BASE}/media/${path.replace(/.*\/media\//, '')}`;
+};
 
 function getRelativeTime(dateString) {
   if (!dateString) return '';
@@ -44,7 +51,7 @@ function NewsHub() {
         <div className="nh-first-div">
           {listData.finishtechnology_Last?.map((item, index) => (
             <div key={index} className="nh-news-card" onClick={() => registerView('lifestyle', item.slug)}>
-              <img className='nh-news-cardimglong' src={item.img_Lifestyle} alt="img" />
+              <img className='nh-news-cardimglong' src={getImgUrl(item.img_Lifestyle)} alt="img" />
               
               <div className='nh-txtitems'>
                 <h3>{item.begtxt}</h3>
@@ -61,7 +68,7 @@ function NewsHub() {
         <div className="nh-second-div">
           {listData.finishtechnology_Last_smallbox?.map((item, index) => (
             <div key={index} className="nh-news-cardtwo" onClick={() => registerView('lifestyle', item.slug)}>
-              <img className='nh-imgsmall' src={item.img_Lifestyle} alt="img" />
+              <img className='nh-imgsmall' src={getImgUrl(item.img_Lifestyle)} alt="img" />
               <div className='nh-itemcard'>
                 <h3>{item.begtxt}</h3>
                 <div className='nh-viewandtimer'>
@@ -80,7 +87,7 @@ function NewsHub() {
         <div className="nh-first-div">
           {listData.ahsddecoration_Last?.map((item, index) => (
             <div key={index} className="nh-news-card" onClick={() => registerView('decoration', item.slug)}>
-              <img className='nh-news-cardimglong' src={item.img_Decoration} alt="img" />
+              <img className='nh-news-cardimglong' src={getImgUrl(item.img_Decoration)} alt="img" />
               
               <div className='nh-txtitems'>
                 <h3>{item.text}</h3>
@@ -97,7 +104,7 @@ function NewsHub() {
         <div className="nh-second-div">
           {listData.ahsddecoration_Lastsmalltwos?.map((item, index) => (
             <div key={index} className="nh-news-cardtwo" onClick={() => registerView('decoration', item.slug)}>
-              <img className='nh-imgsmall' src={item.img_Decoration} alt="img" />
+              <img className='nh-imgsmall' src={getImgUrl(item.img_Decoration)} alt="img" />
               <div className='nh-itemcard'>
                 <h3>{item.text}</h3>
                 <div className='nh-viewandtimer'>
