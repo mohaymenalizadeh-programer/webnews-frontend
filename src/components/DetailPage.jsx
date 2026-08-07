@@ -233,7 +233,7 @@ function DetailPage() {
 
   const title = news.dodslg || news.txt_news || news.begtxt || news.text || news.matn || news.title || news.Artculture_title || 'بدون عنوان';
   const shortTxt = news.pagetxt_newsArtculture || news.pagetxt_newsoftheday || news.pagetxt_newsLifestyle || news.pagetxt_newsDecoration || news.pagetxt_newsTechnology || '';
-  const longTxt = news.page_newsArtculture_title || news.Artculture_title || news.page_newsoftheday_title || news.begtxt || news.page_newsLifestyle_title || news.page_newsDecoration_title || news.page_newsTechnology_title || news.matn || news.title || '';
+  const longTxt = news.page_newsArtculture_title || news.pagetxt_newsArtculture || news.page_newsoftheday_title || news.begtxt || news.page_newsLifestyle_title || news.page_newsDecoration_title || news.page_newsTechnology_title || news.pagetxt_newsTechnology || news.pagetxt_newsDecoration || '';
   const image = news.img_Artculture || news.img_ftheday || news.img_Lifestyle || news.img_Decoration || news.img_Technology;
 
   const articleSchema = {

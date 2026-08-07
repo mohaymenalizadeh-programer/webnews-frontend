@@ -252,6 +252,11 @@
   font-weight: 800 !important;
   line-height: 1.4;
   margin: 0 0 8px 19px;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; 
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .custom-featured-desc-text {

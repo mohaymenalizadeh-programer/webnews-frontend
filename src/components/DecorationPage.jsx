@@ -59,13 +59,12 @@ function DecorationPage() {
       .then(res => {
         const data = res.data;
         if (data.alldecoration) setNewsList(data.alldecoration);
-
         const combinedLatest = [
-          ...(data.twonewsofday || []).map(item => ({ title: item.title_news || item.txt_news, img: item.img_ftheday, slug: item.slug, cat: 'newsoftheday' })),
-          ...(data.twolifestyle || []).map(item => ({ title: item.begtxt || item.longtitle, img: item.img_Lifestyle, slug: item.slug, cat: 'lifestyle' })),
+          ...(data.twonewsofday || []).map(item => ({ title: item.txt_news || item.txt_news, img: item.img_ftheday, slug: item.slug, cat: 'newsoftheday' })),
+          ...(data.twolifestyle || []).map(item => ({ title: item.begtxt || item.begtxt, img: item.img_Lifestyle, slug: item.slug, cat: 'lifestyle' })),
           ...(data.twodecoration || []).map(item => ({ title: item.text || item.title, img: item.img_Decoration, slug: item.slug, cat: 'decoration' })),
-          ...(data.twotechnology || []).map(item => ({ title: item.matn || item.explanation, img: item.img_Technology, slug: item.slug, cat: 'technology' })),
-          ...(data.twoartculture || []).map(item => ({ title: item.dodslg || item.Artculture_title, img: item.img_Artculture, slug: item.slug, cat: 'artculture' }))
+          ...(data.twotechnology || []).map(item => ({ title: item.matn || item.matn, img: item.img_Technology, slug: item.slug, cat: 'technology' })),
+          ...(data.twoartculture || []).map(item => ({ title: item.dodslg || item.dodslg, img: item.img_Artculture, slug: item.slug, cat: 'artculture' }))
         ];
 
         setLatestList(combinedLatest);
