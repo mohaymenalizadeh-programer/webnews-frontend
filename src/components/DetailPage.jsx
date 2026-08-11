@@ -233,7 +233,7 @@ function DetailPage() {
 
   const title = news.dodslg || news.txt_news || news.begtxt || news.text || news.matn || news.title || news.Artculture_title || 'بدون عنوان';
   const shortTxt = news.pagetxt_newsArtculture || news.pagetxt_newsoftheday || news.pagetxt_newsLifestyle || news.pagetxt_newsDecoration || news.pagetxt_newsTechnology || '';
-  const longTxt = news.page_newsArtculture_title || news.pagetxt_newsArtculture || news.page_newsoftheday_title || news.begtxt || news.page_newsLifestyle_title || news.page_newsDecoration_title || news.page_newsTechnology_title || news.pagetxt_newsTechnology || news.pagetxt_newsDecoration || '';
+  const longTxt = news.page_newsoftheday_title || news.page_newsLifestyle_title || news.page_newsDecoration_title || news.page_newsTechnology_title || news.page_newsArtculture_title || news.longtitle || news.title_news || news.explanation || news.title || news.Artculture_title || '';
   const image = news.img_Artculture || news.img_ftheday || news.img_Lifestyle || news.img_Decoration || news.img_Technology;
 
   const articleSchema = {
@@ -277,7 +277,7 @@ function DetailPage() {
                     {news.views || 0} بازدید
                   </span>
                   <span className="det-meta-item">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 16 14"></polyline></svg>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                     {getRelativeTime(news.publish_date)}
                   </span>
                 </div>
